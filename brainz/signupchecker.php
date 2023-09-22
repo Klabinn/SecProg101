@@ -25,7 +25,7 @@
             #hashing dulu bos
             $hashed= password_hash($password, PASSWORD_DEFAULT);
 
-            $query = "INSERT INTO users (username, password, email, date) VALUES ('$username', '$hash', '$email', current_timestamp())";
+            $query = "INSERT INTO users (username, password, email, date) VALUES ('$username', '$hashed', '$email', current_timestamp())";
             
             $result = mysqli_query($conn, $query);
             
@@ -33,7 +33,7 @@
                 echo 
                 "<div class='form'>
                 <h3>You are registered successfully.</h3>
-                <br/>Click here to <a href='login.html'>Login</a></div>";
+                <br/>Click here to <a href='../login.html'>Login</a></div>";
             }
         }
         else{
