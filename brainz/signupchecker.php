@@ -37,7 +37,7 @@
             }
         }
         else{
-            $exists = true
+            $exists = true;
         }
     }
 
