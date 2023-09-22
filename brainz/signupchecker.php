@@ -31,17 +31,20 @@
             
             if($result){
                 echo 
-                "<div class='form'>
+                "<div class='login-container'>
                 <h3>You are registered successfully.</h3>
                 <br/>Click here to <a href='../login.html'>Login</a></div>";
             }
         }
-        else{
-            $exists = true;
-        }
+    
     }
-
-
-
+    else{
+        echo 
+            "<div class='login-container'>
+            <h3>Akun udah ada bjir</h3>
+            <br>resubmit form? 
+            <br><a href='../login.html'>Login</a>
+            </div>";
+    }
     }
 ?>
