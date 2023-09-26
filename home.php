@@ -9,13 +9,10 @@
 </head>
 <body>
     <div class="topnav"> <!--navbar kita ini-->
-        <a class="active" href="home.html">Home</a>
+        <a class="active" href="home.php">Home</a>
         <a href="#news">News</a>
-        <a href="signup.html">SignUp</a>
-        <a href="login.html">Login</a>
+        <a href="signup.php">SignUp</a>
+        <a href="login.php">Login</a>
     </div>
-
-    
-    
 </body>
 </html>

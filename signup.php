@@ -9,21 +9,26 @@
 </head>
 <body>
     <div class="topnav"> <!--navbar kita ini-->
-        <a href="home.html">Home</a>
+        <a href="home.php">Home</a>
         <a href="#news">News</a>
-        <a href="signup.html">SignUp</a>
-        <a class="active" href="login.html">Login</a>
+        <a class="active" href="signup.php">SignUp</a>
+        <a href="login.php">Login</a>
     </div>
     
     <div class="login-container">
-        <h2>Login</h2>
-        <form action="brainz/loginchecker.php" method="POST">
+        <h2>SignUp</h2>
+        <form action="brainz/signupchecker.php" method="POST">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
+            
+            <label for="username">Email:</label>
+            <input type="text" id="email" name="email" required>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
 
+            <label for="cpassword">Confirm Password:</label>
+            <input type="password" id="cpassword" name="cpassword" required>
             <input type="submit" value="Login">
         </form>
     </div>

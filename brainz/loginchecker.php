@@ -2,7 +2,7 @@
 
 
 
-    $is_unique = false;
+    $is_login = false;
 
     if($_SERVER ['REQUEST_METHOD'] === "POST"){
         
