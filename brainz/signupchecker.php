@@ -1,12 +1,9 @@
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="assets/style.css">
-    <link rel="stylesheet" href="assets/navbar.css">
-</head>
-
 <?php
+
+    session_start();
+
+    echo "<link rel='stylesheet' href='assets/style.css'>
+    <link rel='stylesheet' href='assets/navbar.css'>";
 
     $exists = false;
 
@@ -22,6 +19,7 @@
         $password = stripslashes($_POST['password']);
         $password = mysqli_real_escape_string($conn, $password);
         $cpassword = stripslashes($_POST['cpassword']);
+        $cpassword = mysqli_real_escape_string($conn, $cpassword);
 
         $sql = "SELECT * FROM users WHERE username='$username'";
         $result = mysqli_query($conn, $sql);

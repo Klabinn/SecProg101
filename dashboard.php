@@ -20,10 +20,10 @@
 </head>
 <body>
     <div class="topnav"> <!--navbar kita ini-->
-        <a class="active" href="home.html">Home</a>
-        <a href="#news">News</a>
-        <a href="signup.html">SignUp</a>
-        <a href="login.html">Login</a>
+        <a class="active" href="home.html">SignOut</a>
+        <a href="#news">BodyParts</a>
+        <a href="signup.html">Purchases</a>
+        <a href="login.html">Forum</a>
     </div>
 </body>
 </html>

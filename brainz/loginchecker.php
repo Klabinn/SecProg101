@@ -1,6 +1,6 @@
 <?php
 
-
+    session_start();
 
     $is_login = false;
 
@@ -9,23 +9,31 @@
 
         include 'dbconnect.php';
 
-        $username = $_POST['username']; 
-        $password = $_POST['password'];
-        $cpassword = $_POST['cpassword'];
+        $username = stripslashes($_POST['username']); 
+        $username = mysqli_real_escape_string($conn, $username);
+        $password = stripslashes($_POST['password']);
+        $password = mysqli_real_escape_string($conn, $password);
 
-        $sql = "SELECT * FROM users WHERE username='$username'";
+        $hashed = password_hash($password, PASSWORD_DEFAULT);
+
+        // print($username);
+        // print($hashed);
+
+        $sql = "SELECT * FROM users WHERE username='$username' AND password='$hashed'";
         
         $result = mysqli_query($conn, $sql);
-        $avail = mysqli_num_rows($result);
+        $correct = mysqli_num_rows($result);
 
 
-        // var_dump($username);
-        // var_dump($password);
-
-        if($username === "admin" && $password ==="admin")
-            echo"Login Sucess, Username: $username";
-        else
-            echo"Login Failed, Username: $username";
+        if($correct){
+            echo 
+            "<script>alert('Welcome to the HackerDen');</script>";
+            $is_login = true;
+            header("Location: ../dashboard.php");
+        }
+        else{
+            echo "<script>alert('You are logged out'); window.location.href='..\login.html';";          
+        }
 
     }
 ?>
