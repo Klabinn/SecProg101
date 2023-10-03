@@ -14,6 +14,7 @@
         $password = stripslashes($_POST['password']);
         $password = mysqli_real_escape_string($conn, $password);
 
+        #Passwordnya gua hash jadi validasinya harus pake hash ini
         $hashed = password_hash($password, PASSWORD_DEFAULT);
 
         $sql = "SELECT * FROM users WHERE username='$username' AND password='$hashed'";
@@ -29,7 +30,8 @@
             header("Location: ../dashboard.php");
         }
         else{
-            echo "<script>alert('Failed.')</script>; window.location.href='..\login.html';";          
+            $is_login = "wrong";
+            header("Location: ../login.php");    
         }
 
     }
