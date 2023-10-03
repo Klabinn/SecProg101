@@ -16,9 +16,6 @@
 
         $hashed = password_hash($password, PASSWORD_DEFAULT);
 
-        // print($username);
-        // print($hashed);
-
         $sql = "SELECT * FROM users WHERE username='$username' AND password='$hashed'";
         
         $result = mysqli_query($conn, $sql);
@@ -32,7 +29,7 @@
             header("Location: ../dashboard.php");
         }
         else{
-            echo "<script>alert('You are logged out'); window.location.href='..\login.html';";          
+            echo "<script>alert('Failed.')</script>; window.location.href='..\login.html';";          
         }
 
     }
