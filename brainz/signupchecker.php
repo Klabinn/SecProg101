@@ -69,7 +69,7 @@
             else{
                 echo 
                     "<div class='login-container'>
-                    <h3>Akun udah ada bjir</h3>
+                    <h3>Akun udah ada</h3>
                     <br>resubmit form? 
                     <br><a href='../login.html'>Login</a>
                     </div>";
