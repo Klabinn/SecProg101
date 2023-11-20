@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +29,20 @@
             <input type="password" id="password" name="password" required>
 
             <input type="submit" value="Login">
+            <?php
+            if(isset($_SESSION["exists"])) {
+                echo "<br>";
+                echo "<br>";
+                echo '<div class="warning">' . $_SESSION["exists"] . '</div>';
+                unset($_SESSION["exists"]);
+            }
+            else if(isset($_SESSION['login_failed'])) {
+                echo "<br>";
+                echo "<br>";
+                echo '<div class="warning">' . $_SESSION["login_failed"] . '</div>';
+                unset($_SESSION["login_failed"]);
+            }
+            ?>
         </form>
     </div>
 </body>

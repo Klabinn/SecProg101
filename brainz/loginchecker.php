@@ -4,43 +4,34 @@
 
     if($_SERVER ['REQUEST_METHOD'] === "POST"){
         
-
         require_once 'dbconnect.php';
 
-        $username = stripslashes($_POST['username']); 
-        $username = mysqli_real_escape_string($conn, $username);
-        $password = stripslashes($_POST['password']);
-        $password = mysqli_real_escape_string($conn, $password);
+        // ini saya hapus escape string soalnya udah ada prepare sql
+        $username = $_POST['username']; 
+        $password = $_POST['password'];
 
-        #Passwordnya gua hash jadi validasinya harus pake hash ini
-        $hashed = password_hash($password, PASSWORD_DEFAULT);
-
-
-        // prep statement
-        $sql = "SELECT * FROM users WHERE username=? AND password=?;";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $username, $password);
+        $ver = "SELECT * FROM users WHERE username=?;";
+        $stmt = $conn->prepare($ver);
+        $stmt->bind_param("s", $username);
         $stmt->execute();
 
-        $result = $conn->get_result()
-        
-
+        $result = $stmt->get_result();
         if($result->num_rows === 1){
 
-            $row = $result->fetch_assoc(); #fetch assoc adalah method untuk manipulasi data di DB 
+            $row = $result->fetch_assoc();
 
-            $row['password'];
-
-            $_SESSION['is_login'] = true;
-            $_SESSION['username'] = $row['username'];
-            $_SESSION['email'] = $row['email'];
-
-
-            header("Location: ../dashboard.php");
+            $hashverif = $row['password'];
+            // verifnya pake password_verify
+            if(password_verify($password, $hashverif)) {
+                $row['password'];
+                $_SESSION['is_login'] = true;
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['email'] = $row['email'];
+                header("Location: ../dashboard.php");
+            }
         }
         else{
-            // $is_login = "wrong";
-            echo ' salah ';
+            $_SESSION['login_failed'] = "Incorrect Login Credentials";
             header("Location: ../login.php");    
         }
 
