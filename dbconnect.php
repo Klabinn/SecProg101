@@ -6,8 +6,7 @@
 
 	$database = "secureSQL";
 
-	$conn = mysqli_connect($servername,
-		$username, $password, $database);
+	$conn = mysqli_connect($servername, $username, $password, $database);
 
 // for debuging only
 	// if($conn) {
