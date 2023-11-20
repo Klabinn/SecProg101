@@ -2,9 +2,6 @@
 
     session_start();
 
-    echo "<link rel='stylesheet' href='assets/style.css'>
-    <link rel='stylesheet' href='assets/navbar.css'>";
-
     $exists = false;
 
     if($_SERVER ['REQUEST_METHOD'] === "POST"){
@@ -21,8 +18,8 @@
         $cpassword = stripslashes($_POST['cpassword']);
         $cpassword = mysqli_real_escape_string($conn, $cpassword);
 
-
-        $is_valdi = "";
+        $is_valdi = false;
+        $_SESSION[''] = "";
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $is_valdi = "Invaldi Gmail.";
@@ -42,29 +39,30 @@
             $stmt->bind_param("ss", $username, $password);
             $stmt->execute();
     
-            $result = $conn->get_result()
+            $result = $stmt->get_result();
 
-            if(mysqli_num_rows($result) === 0){
+            if($result->num_rows == 0){
                 
                 if(($password === $cpassword) && !$exists){
 
-                #hashing dulu bos
-                $hashed= password_hash($password, PASSWORD_DEFAULT);
-
-                $query = "INSERT INTO users (username, password, email, date) VALUES ('?', '?', '?', current_timestamp())";
-                $stmt = $conn->prepare($query);
-                $stmt->bind_param("sss", $username, $password, $email);
-                $stmt->execute();
-
-                $result = $conn->get_result()
+                $hashed = password_hash($password, PASSWORD_DEFAULT);
+                $userid = "UID_".uniqid();
+                echo $userid;
                 
-                if(isset($result)){
-                    echo 
-                    "<div class='login-container'>
-                    <h3>You are registered successfully.</h3>
-                    <br/>Click here to <a href='../login.html'>Login</a></div>";
+                $query = "INSERT INTO users(userID, roles, username, email, password, date) VALUES (?, 'user', ?, ?, ?, current_timestamp());";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('ssss', $userid, $username, $email, $hashed);
+                $stmt->execute();
+                
+                $result = $stmt->get_result();
+                
+                    if(isset($result)){
+                        echo 
+                        "<div class='login-container'>
+                        <h3>You are registered successfully.</h3>
+                        <br/>Click here to <a href='../login.html'>Login</a></div>";
+                    }
                 }
-            }
             }
             else{
                 echo 
