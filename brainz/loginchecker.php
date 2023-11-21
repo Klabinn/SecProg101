@@ -8,9 +8,7 @@
         require_once 'dbconnect.php';
 
         $username = stripslashes($_POST['username']); 
-        $username = mysqli_real_escape_string($conn, $username);
         $password = stripslashes($_POST['password']);
-        $password = mysqli_real_escape_string($conn, $password);
 
         #Passwordnya gua hash jadi validasinya harus pake hash ini
         $hashed = password_hash($password, PASSWORD_DEFAULT);

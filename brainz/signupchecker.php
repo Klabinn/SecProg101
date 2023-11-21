@@ -10,16 +10,12 @@
         require_once 'dbconnect.php';
 
         $username = stripslashes($_POST['username']); 
-        $username = mysqli_real_escape_string($conn, $username);
         $email = stripslashes($_POST['email']);
-        $email = mysqli_real_escape_string($conn, $email);
         $password = stripslashes($_POST['password']);
-        $password = mysqli_real_escape_string($conn, $password);
         $cpassword = stripslashes($_POST['cpassword']);
-        $cpassword = mysqli_real_escape_string($conn, $cpassword);
 
         $is_valdi = false;
-        $_SESSION[''] = "";
+        $_SESSION['is_valdi'] = "";
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $is_valdi = "Invaldi Gmail.";

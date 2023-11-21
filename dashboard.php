@@ -24,7 +24,7 @@
         <a href="#news">BodyParts</a>
         <a href="signup.html">Purchases</a>
         <a href="login.html">Forum</a>
-    </div>
+    </div> 
 </body>
 </html>
 
