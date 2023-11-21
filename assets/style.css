@@ -44,3 +44,45 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #0056b3;
 }
+
+.dashboard .parts {
+    padding: 5rem 5%;
+    min-height: 20rem;
+    max-width: 60rem;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.column {
+    padding: 5%;
+    margin-top: -350px;
+    width: 40%;
+}
+
+.column img {
+    width: 100%;
+}
+
+.column p {
+    font-size: 1.7rem;
+    font-weight: 500;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.column p span {
+    color:#04AA6D;
+    font-weight: 600;
+}
+
+.warn {
+    margin-top: 0.5px;
+    color: red;
+}
+
+.warning {
+    color: red;
+}

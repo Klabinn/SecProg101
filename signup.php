@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,9 +27,21 @@
             
             <label for="username">Email:</label>
             <input type="text" id="email" name="email" required>
+            <?php
+            if(isset($_SESSION["email_notvalid"])) {
+                echo '<div class="warn">' . $_SESSION["email_notvalid"] . '</div>';
+                unset($_SESSION["email_notvalid"]);
+            }
+            ?>
 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
+            <?php
+            if(isset($_SESSION["password_notvalid"])) {
+                echo '<div class="warn">' . $_SESSION["password_notvalid"] . '</div>';
+                unset($_SESSION["password_notvalid"]);
+            }
+            ?>
 
             <label for="cpassword">Confirm Password:</label>
             <input type="password" id="cpassword" name="cpassword" required>
@@ -34,8 +50,9 @@
     </div>
 </body>
 
-<?php
-        echo rand ( 10000 , 99999 );
-?>
+<!-- ini gw gatau mau diapain -->
+<!-- <?php
+        // echo rand ( 10000 , 99999 );
+?> -->
 
 </html>
