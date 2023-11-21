@@ -2,9 +2,13 @@
 
     session_start();
 
+
+
+
     if($_SERVER ['REQUEST_METHOD'] === "POST"){
         
         require_once 'dbconnect.php';
+        require_once 'sessionhandler.php';
 
         $username = strip_tags($_POST['username']);
         $username = stripslashes($_POST['username']);
@@ -68,6 +72,24 @@
                     $result = $stmt->get_result();
                     
                     if(isset($result)){
+
+                        $_SESSION['is_login'] = true;
+                        $_SESSION['username'] = $username;
+                        $_SESSION['email'] = $email;
+                        sessionCreate($userid);
+
+                        $SID = $_SESSION['SID'];
+                        $cookie = $_SESSION['cookie'];
+                        $expTime = $_SESSION['expTime'];
+
+                        $query = "INSERT INTO usession (SID, userID, sessionID, expdate) VALUES (?, ?, ?, ?)";
+                        $stmt = $conn->prepare($query);
+                        $stmt->bind_param('sssi', $SID, $userid, $cookie, $expTime);
+                        $stmt->execute();
+                        $stmt->close();
+
+                        setcookie($userid, $cookie, $expTime);
+                        
                         header("Location: ../dashboard.php");
                     }
                 }

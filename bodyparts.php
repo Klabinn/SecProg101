@@ -22,7 +22,7 @@
     <div class="topnav"> <!--navbar kita ini-->
         <a class="active" href="home.php">SignOut</a>
         <a href="bodyparts.php">BodyParts</a>
-        <a href="forum.php">Forum</a>
+        <a href="offer.php">Auction Register</a>
     </div> 
 </body>
 </html>

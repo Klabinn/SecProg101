@@ -10,6 +10,6 @@ CREATE TABLE users(
 CREATE TABLE usession(
     SID varchar(115),
     userID varchar(155),
-    username varchar(50),
-    sessionID varchar(155)
+    sessionID varchar(155),
+    expdate int
 )
