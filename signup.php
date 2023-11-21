@@ -47,12 +47,16 @@
             <input type="password" id="cpassword" name="cpassword" required>
             <input type="submit" value="Login">
         </form>
+        <?php 
+                if(isset($_GET['error'])) {
+                    if(isset($_SESSION["error101"])) {
+                        $errorMessage = $_SESSION["error101"];
+                        echo '<br>' . $errorMessage;
+                    }
+                }
+                unset($_SESSION['error_message']);
+            ?>
     </div>
 </body>
-
-<!-- ini gw gatau mau diapain -->
-<!-- <?php
-        // echo rand ( 10000 , 99999 );
-?> -->
 
 </html>

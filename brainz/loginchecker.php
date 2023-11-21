@@ -22,7 +22,6 @@
             $hashverif = $row['password'];
             // verifnya pake password_verify
             if(password_verify($password, $hashverif)) {
-                $row['password'];
                 $_SESSION['is_login'] = true;
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['email'] = $row['email'];
