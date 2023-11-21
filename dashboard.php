@@ -20,11 +20,12 @@
 </head>
 <body>
     <div class="topnav"> <!--navbar kita ini-->
-        <a class="active" href="home.html">SignOut</a>
-        <a href="#news">BodyParts</a>
-        <a href="signup.html">Purchases</a>
-        <a href="login.html">Forum</a>
+        <a class="active" href="home.php">SignOut</a>
+        <a href="bodyparts.php">BodyParts</a>
+        <a href="forum.php">Forum</a>
     </div> 
+
+    <h1 text-align:center> Welcome to TokoBodyParts </h1>
 </body>
 </html>
 

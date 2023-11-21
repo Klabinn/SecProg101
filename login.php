@@ -29,21 +29,16 @@
             <input type="password" id="password" name="password" required>
 
             <input type="submit" value="Login">
-            <?php
-            if(isset($_SESSION["exists"])) {
-                echo "<br>";
-                echo "<br>";
-                echo '<div class="warning">' . $_SESSION["exists"] . '</div>';
-                unset($_SESSION["exists"]);
-            }
-            else if(isset($_SESSION['login_failed'])) {
-                echo "<br>";
-                echo "<br>";
-                echo '<div class="warning">' . $_SESSION["login_failed"] . '</div>';
-                unset($_SESSION["login_failed"]);
-            }
-            ?>
         </form>
+        <?php 
+                if(isset($_GET['error'])) {
+                    if(isset($_SESSION["error101"])) {
+                        $errorMessage = $_SESSION["error101"];
+                        echo '<br><div style="color:Purple;">' . $errorMessage . '</div>';
+                    }
+                }
+                unset($_SESSION['error_message']);
+            ?>
     </div>
 </body>
 </html>

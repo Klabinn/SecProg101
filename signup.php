@@ -50,7 +50,7 @@
                 if(isset($_GET['error'])) {
                     if(isset($_SESSION["error101"])) {
                         $errorMessage = $_SESSION["error101"];
-                        echo '<br><div style="color:black;">' . $errorMessage . '</div>';
+                        echo '<br><div style="color:Purple;">' . $errorMessage . '</div>';
                     }
                 }
                 unset($_SESSION['error_message']);

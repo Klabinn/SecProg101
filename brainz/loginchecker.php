@@ -1,5 +1,4 @@
 <?php
-
     session_start();
 
     if($_SERVER ['REQUEST_METHOD'] === "POST"){
@@ -29,7 +28,7 @@
             }
         }
         else{
-            $_SESSION['login_failed'] = "Incorrect Login Credentials";
+            $_SESSION['error101'] = "Incorrect Login Credentials";
             header("Location: ../login.php");    
         }
 

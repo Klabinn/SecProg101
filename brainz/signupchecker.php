@@ -15,9 +15,18 @@
         $cpassword = strip_tags($_POST['cpassword']);
         $cpassword = stripslashes($_POST['cpassword']);
 
+        $_SESSION['error101'] = "";
+
+        $regex = '/[*^()+=\[\]\'\/{}|<>~]/';
+
+        if (preg_match($regex, $username) && preg_match($regex, $email) && preg_match($regex, $password)) {
+            $_SESSION['error101'] = "No funny business!";
+            header("Location: ../signup.php?error=1");
+            exit;
+        }
+
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['error101'] = "Email not valid";
-            echo "email fail";
             header("Location: ../signup.php?error=1");
             exit;
         }
@@ -33,15 +42,6 @@
             header("Location: ../signup.php?error=1");
             exit;
         }
-
-        $regex = "^*()+=[]';/{}|<>~";
-
-        if (!preg_match($regex, $username) || !preg_match($regex, $email) || !preg_match($regex, $password) ) {
-            $_SESSION['error101'] = "No funny business!";
-            header("Location: ../signup.php?error=1");
-            exit;
-        }
-        
         else{
             $sql = "SELECT * FROM users WHERE username=? OR email=?;";
             $stmt = $conn->prepare($sql);
@@ -55,7 +55,7 @@
                 header("Location: ../login.php?error=1");
             }
             else{
-                if(($password === $cpassword) && !isset($_SESSION['error101'])){
+                if(($password === $cpassword)){
                     $hashed = password_hash($password, PASSWORD_DEFAULT);
                     $userid = "UID_".uniqid();
                     // echo $userid;
