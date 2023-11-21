@@ -5,7 +5,9 @@
         
         require_once 'dbconnect.php';
 
+        $username = strip_tags($_POST['username']);
         $username = stripslashes($_POST['username']); 
+        $password = strip_tags($_POST['password']);
         $password = stripslashes($_POST['password']);
 
         $ver = "SELECT * FROM users WHERE username=?;";

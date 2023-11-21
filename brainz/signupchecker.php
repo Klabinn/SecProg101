@@ -19,7 +19,7 @@
 
         $regex = '/[*^()+=\[\]\'\/{}|<>~]/';
 
-        if (preg_match($regex, $username) && preg_match($regex, $email) && preg_match($regex, $password)) {
+        if (preg_match($regex, $username) || preg_match($regex, $email) || preg_match($regex, $password)) {
             $_SESSION['error101'] = "No funny business!";
             header("Location: ../signup.php?error=1");
             exit;
