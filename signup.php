@@ -7,14 +7,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>SignUp Page</title>
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="assets/navbar.css">
 </head>
 <body>
     <div class="topnav"> <!--navbar kita ini-->
         <a href="home.php">Home</a>
-        <a href="#news">News</a>
         <a class="active" href="signup.php">SignUp</a>
         <a href="login.php">Login</a>
     </div>
@@ -51,12 +50,11 @@
                 if(isset($_GET['error'])) {
                     if(isset($_SESSION["error101"])) {
                         $errorMessage = $_SESSION["error101"];
-                        echo '<br>' . $errorMessage;
+                        echo '<br><div style="color:black;">' . $errorMessage . '</div>';
                     }
                 }
                 unset($_SESSION['error_message']);
             ?>
     </div>
 </body>
-
 </html>

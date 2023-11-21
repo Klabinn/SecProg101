@@ -17,19 +17,20 @@
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['error101'] = "Email not valid";
-            header("Location: ../signup.php");
+            echo "email fail";
+            header("Location: ../signup.php?error=1");
             exit;
         }
 
         if (strlen($password) < 8) {
             $_SESSION['error101'] = "Password is less than 8 characters";
-            header("Location: ../signup.php");
+            header("Location: ../signup.php?error=1");
             exit;
         }
 
         if (strcmp($password, $cpassword)) {
             $_SESSION['error101'] = "Password is not the same";
-            header("Location: ../signup.php");
+            header("Location: ../signup.php?error=1");
             exit;
         }
 
@@ -37,7 +38,7 @@
 
         if (!preg_match($regex, $username) || !preg_match($regex, $email) || !preg_match($regex, $password) ) {
             $_SESSION['error101'] = "No funny business!";
-            header("Location: ../signup.php");
+            header("Location: ../signup.php?error=1");
             exit;
         }
         
@@ -51,7 +52,7 @@
 
             if($result->num_rows !== 0){
                 $_SESSION['error101'] = "User already existed, please login.";
-                header("Location: ../login.php");
+                header("Location: ../login.php?error=1");
             }
             else{
                 if(($password === $cpassword) && !isset($_SESSION['error101'])){
