@@ -35,6 +35,14 @@
             exit;
         }
 
+        $number = '/[0-9]/';
+
+        if (!preg_match($number, $price)) {
+            $_SESSION['error101'] = "Price is number.";
+            header("Location: ../offer.php?error=1");
+            exit;
+        }
+
         if (isset($_FILES['file'])) {
             $unique = uniqid();
             $attachment = $_FILES['file'];
