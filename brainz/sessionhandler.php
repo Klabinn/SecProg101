@@ -8,7 +8,7 @@
 
     function sessionCreate($userID) {
         $SID = "SID_" . uniqid();
-        $cookie = generateCookie(20);
+        $cookie = generateCookie(40);
         $expTime = time() + 1800; // 30 minutes
 
         $_SESSION['SID'] = $SID;

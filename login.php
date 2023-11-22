@@ -1,5 +1,9 @@
 <?php 
     session_start();
+
+    
+
+
  ?>
 
 <!DOCTYPE html>
@@ -14,7 +18,6 @@
 <body>
     <div class="topnav"> <!--navbar kita ini-->
         <a href="home.php">Home</a>
-        <a href="#news">News</a>
         <a href="signup.php">SignUp</a>
         <a class="active" href="login.php">Login</a>
     </div>
@@ -37,7 +40,7 @@
                         echo '<br><div style="color:Purple;">' . $errorMessage . '</div>';
                     }
                 }
-                unset($_SESSION['error_message']);
+                unset($_SESSION['error101']);
             ?>
     </div>
 </body>

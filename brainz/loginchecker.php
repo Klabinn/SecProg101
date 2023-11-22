@@ -6,15 +6,12 @@
         require_once 'dbconnect.php';
 
         $username = strip_tags($_POST['username']);
-        $username = stripslashes($_POST['username']); 
         $password = strip_tags($_POST['password']);
-        $password = stripslashes($_POST['password']);
 
         $ver = "SELECT * FROM users WHERE username=?;";
         $stmt = $conn->prepare($ver);
         $stmt->bind_param("s", $username);
         $stmt->execute();
-
         $result = $stmt->get_result();
         if($result->num_rows === 1){
 

@@ -1,35 +1,46 @@
 <?php
     session_start();
 
+    if($_SESSION['is_login'] !== true){
+        
+        header("Location: login.php");
+    }
+
     if($_SERVER ['REQUEST_METHOD'] === "POST"){
         
         require_once 'dbconnect.php';
 
+        $sql = "SELECT * FROM users WHERE username=?;";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $_SESSION['username']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $userid = $row['userID'];
+        $stmt->close();
+
         $originaltitle = strip_tags($_POST['OriginalTitle']);
         $pricechange = strip_tags($_POST['pricechange']);
 
-        $sql = "SELECT * FROM bodyparts WHERE title=?;";
+        $sql = "SELECT * FROM bodyparts WHERE title = ? && userID = ?;";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $originaltitle);
+        $stmt->bind_param("ss", $originaltitle, $userid);
         $stmt->execute();
-
         $result = $stmt->get_result();
+
         if($result->num_rows === 1){
+            $sql = "UPDATE bodyparts SET price=? WHERE userID =?;";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ss", $pricechange, $userid);
+            $stmt->execute();
+            $stmt->close();
 
-            $row = $result->fetch_assoc();
-
-            $hashverif = $row['password'];
-            // verifnya pake password_verify
-            if(password_verify($password, $hashverif)) {
-                $_SESSION['is_login'] = true;
-                $_SESSION['username'] = $row['username'];
-                $_SESSION['email'] = $row['email'];
-                header("Location: ../dashboard.php");
-            }
+            $_SESSION['error101'] = "Ganti harga ya? Wes tak ganti yo.";
+            header("Location: ../offerAudit.php?error=1");  
         }
         else{
-            $_SESSION['error101'] = "Incorrect Login Credentials";
-            header("Location: ../login.php");    
+            $_SESSION['error101'] = "Salah Mas/Mbak Cek lgi?";
+            header("Location: ../updateOffer.php?error=1");    
         }
 
     }
