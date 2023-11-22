@@ -26,10 +26,14 @@
                 $_SESSION['email'] = $row['email'];
                 header("Location: ../dashboard.php");
             }
+            else{
+                $_SESSION['error101'] = "Incorrect Login Credentials";
+                header("Location: ../login.php?error=1"); 
+            }
         }
         else{
             $_SESSION['error101'] = "Incorrect Login Credentials";
-            header("Location: ../login.php");    
+            header("Location: ../login.php?error=1");    
         }
 
     }

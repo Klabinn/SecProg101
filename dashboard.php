@@ -1,6 +1,10 @@
 <?php
     session_start();
 
+    require "./brainz/sessionhandler.php";
+
+    sessionChecker();
+
     if($_SESSION['is_login'] !== true){
 
         header("Location: login.php");

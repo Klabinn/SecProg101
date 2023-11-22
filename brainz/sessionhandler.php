@@ -23,7 +23,7 @@
         $stmt->execute();
         $stmt->close();
 
-        setcookie('user', $cookie, $expTime, '/');
+        setcookie($_SESSION['username'], $cookie, $expTime, '/');
         $_SESSION['cookie'] = $cookie;
 
         unset($_SESSION['userID']);
@@ -32,10 +32,10 @@
     function sessionChecker(){
         global $conn;
 
-        $currentCookie = $_COOKIE['value'];
+        $username = $_SESSION['username'];
+        $currentCookie = $_COOKIE[$username];
         $current_time = time();
-
-        $query = "SELECT *  FROM usession WHERE sessionID = ?";
+        $query = "SELECT * FROM usession WHERE sessionID = ? AND expdate > $current_time";
         $stmt = $conn->prepare($query);
         $stmt->bind_param('s', $currentCookie);
         $stmt->execute();
@@ -47,14 +47,16 @@
         }
         else{
             $_SESSION['is_login'] = false;
+            $_SESSION['error101'] = 'Gak usah macam macam kau';
+            header("Location: ../signup.php?error=1");
         }
     }
 
     function destroyCookies(){
         global $conn;
-        
+
         $current_time = time();
-        $sql = "DELETE FROM usession WHERE expiration_time < $current_time";
+        $sql = "DELETE FROM usession WHERE expdate < $current_time";
         $conn->query($sql);
         $conn->close();
     }

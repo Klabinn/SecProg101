@@ -10,7 +10,6 @@
 <body>
     <div class="topnav"> <!--navbar kita ini-->
         <a class="active" href="home.php">Home</a>
-        <a href="#news">News</a>
         <a href="signup.php">SignUp</a>
         <a href="login.php">Login</a>
     </div>

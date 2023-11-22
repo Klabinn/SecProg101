@@ -79,6 +79,7 @@
                     move_uploaded_file($attachment_tmp_name, $upload_path);
                     $_SESSION['success200'] = "File Uploaded Successfully. I hope you sell your organ soon!";
                     header("Location: ../offer.php?success=1");
+                    destroyCookies();
                 }
             }
 
