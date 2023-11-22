@@ -25,9 +25,13 @@
         $_SESSION['expTime'] = $expTime;
     }
 
+    function sessionChecker(){
+
+        
+    }
+
+    function destroyCookies(){
 
 
-
-
-
+    }
 ?>

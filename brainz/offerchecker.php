@@ -8,42 +8,20 @@
         require_once 'dbconnect.php';
         require_once 'sessionhandler.php';
 
-        $username = strip_tags($_POST['username']);
-        $username = stripslashes($_POST['username']);
-        $email = strip_tags($_POST['email']);
-        $email = stripslashes($_POST['email']);
-        $password = strip_tags($_POST['password']);
-        $password = stripslashes($_POST['password']);
-        $cpassword = strip_tags($_POST['cpassword']);
-        $cpassword = stripslashes($_POST['cpassword']);
+        $title = striplashes(strip_tags($_POST['title']));
+        $desc = striplashes(strip_tags($_POST['desc']));
+        $price = striplashes(strip_tags($_POST['price']));
 
         $_SESSION['error101'] = "";
 
         $regex = '/[*^()+=\[\]\'\/{}|<>~]/';
 
-        if (preg_match($regex, $username) || preg_match($regex, $email) || preg_match($regex, $password)) {
-            $_SESSION['error101'] = "No funny business!";
-            header("Location: ../signup.php?error=1");
+        if (preg_match($regex, $title) || preg_match($regex, $price)) {
+            $_SESSION['error101'] = "I see what you tryna do, but dont use wierd symbols.";
+            header("Location: ../offer.php?error=1");
             exit;
         }
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $_SESSION['error101'] = "Email not valid";
-            header("Location: ../signup.php?error=1");
-            exit;
-        }
-
-        if (strlen($password) < 8) {
-            $_SESSION['error101'] = "Password is less than 8 characters";
-            header("Location: ../signup.php?error=1");
-            exit;
-        }
-
-        if (strcmp($password, $cpassword)) {
-            $_SESSION['error101'] = "Password is not the same";
-            header("Location: ../signup.php?error=1");
-            exit;
-        }
         else{
             $sql = "SELECT * FROM users WHERE username=? OR email=?;";
             $stmt = $conn->prepare($sql);
