@@ -82,7 +82,7 @@
                         $stmt->execute();
                         $stmt->close();
 
-                        setcookie('user', $cookie, $expTime);
+                        setcookie('user', $cookie, $expTime, '/''k;j hkjhcx);
                         $_SESSION['cookie'] = $cookie;
 
                         header("Location: ../dashboard.php");
