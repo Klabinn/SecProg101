@@ -1,16 +1,10 @@
 <?php
     session_start();
 
-    require "./brainz/sessionhandler.php";
-
-    sessionChecker();
-
     if($_SESSION['is_login'] !== true){
-
+        $_SESSION['error101'] = 'Gak usah macam macam kau';
         header("Location: login.php");
     }
-
-
 ?>
 
 <!DOCTYPE html>

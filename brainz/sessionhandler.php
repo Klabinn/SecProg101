@@ -35,20 +35,18 @@
         $username = $_SESSION['username'];
         $currentCookie = $_COOKIE[$username];
         $current_time = time();
-        $query = "SELECT * FROM usession WHERE sessionID = ? AND expdate > $current_time";
+        $query = "SELECT * FROM usession WHERE sessionID = ? AND expdate > ?;";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param('s', $currentCookie);
+        $stmt->bind_param('si', $currentCookie, $current_time);
         $stmt->execute();
-
         $result = $stmt->get_result();
-        $stmt->close();
         if($result->num_rows === 1){
             $_SESSION['is_login'] = true;
         }
         else{
             $_SESSION['is_login'] = false;
             $_SESSION['error101'] = 'Gak usah macam macam kau';
-            header("Location: ../signup.php?error=1");
+            header("Location: ../SECPROG101/signup.php?error=1");
         }
     }
 
