@@ -24,13 +24,12 @@
         <a href="offerAudit.php">Auction Audit</a>
     </div> 
 
-    <div class="form-actions">
-        <button href="updateOffer.php">
+
+    <div class="login-container">
+    <a href="updateOffer.php">Update Offer Price</a>
+    <br><br>
+    <a href="deleteOffer.php">Delete Offer</a>
     </div>
-    <div class="form-actions">
-        <button href="deleteOffer.php">
-    </div>
-    
 
 </body>
 </html>
