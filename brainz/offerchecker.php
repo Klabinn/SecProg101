@@ -21,6 +21,7 @@
         if(strlen($title) > 50){
             $_SESSION['error101'] = "Please write the title with a maximum length of 50 characters.";
             header("Location: ../offer.php?error=1");
+            exit;
         }
 
         if(strlen($desc) < 10) {
