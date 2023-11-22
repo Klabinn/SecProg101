@@ -1,7 +1,6 @@
 <?php
 
-    session_start();
-
+    session_start(); 
 
     if($_SERVER ['REQUEST_METHOD'] === "POST"){
         
@@ -9,13 +8,9 @@
         require_once 'sessionhandler.php';
 
         $username = strip_tags($_POST['username']);
-        $username = stripslashes($_POST['username']);
         $email = strip_tags($_POST['email']);
-        $email = stripslashes($_POST['email']);
         $password = strip_tags($_POST['password']);
-        $password = stripslashes($_POST['password']);
         $cpassword = strip_tags($_POST['cpassword']);
-        $cpassword = stripslashes($_POST['cpassword']);
 
         $_SESSION['error101'] = "";
 

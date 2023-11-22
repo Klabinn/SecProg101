@@ -2,15 +2,19 @@
 
     session_start();
 
+    if($_SESSION['is_login'] !== true){
+        
+        header("Location: login.php");
+    }
 
     if($_SERVER ['REQUEST_METHOD'] === "POST"){
         
         require_once 'dbconnect.php';
         require_once 'sessionhandler.php';
 
-        $title = striplashes(strip_tags($_POST['title']));
-        $desc = striplashes(strip_tags($_POST['desc']));
-        $price = striplashes(strip_tags($_POST['price']));
+        $title = strip_tags($_POST['title']);
+        $desc = strip_tags($_POST['desc']);
+        $price = strip_tags($_POST['price']);
 
         $_SESSION['error101'] = "";
 

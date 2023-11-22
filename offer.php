@@ -2,7 +2,7 @@
     session_start();
 
     if($_SESSION['is_login'] !== true){
-
+        
         header("Location: login.php");
     }
 ?>
@@ -22,7 +22,6 @@
         <a href="bodyparts.php">BodyParts</a>
         <a href="offer.php">Auction Register</a>
     </div> 
-
     <h1 text-align:center> List your entry</h1>
     <form class="form" method="POST" action="./brainz/offerchecker.php">
             <fieldset>
@@ -46,15 +45,13 @@
             </div>
         </form>
         <?php 
-                if(isset($_GET['error'])) {
-                    if(isset($_SESSION["error101"])) {
-                        $errorMessage = $_SESSION["error101"];
-                        echo '<br><div style="color:Purple;">' . $errorMessage . '</div>';
-                    }
+            if(isset($_GET['error'])) {
+                if(isset($_SESSION["error101"])) {
+                    $errorMessage = $_SESSION["error101"];
+                    echo '<br><div style="color:Purple;">' . $errorMessage . '</div>';
                 }
-                unset($_SESSION['error_message']);
-            ?>
+            }
+            unset($_SESSION['error_message']);
+        ?>
 </body>
 </html>
-
-
