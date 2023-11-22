@@ -38,11 +38,15 @@
 
             $userid = $row['userID'];
 
-            $query = "INSERT INTO bodyparts (userID, tittle, description) VALUES (?, ?, ?)";
+            $query = "INSERT INTO bodyparts (userID, title, description, price) VALUES (?, ?, ?, ?)";
             $stmt = $conn->prepare($query);
-            $stmt->bind_param('ssi', $userid, $title, $price);
+            $stmt->bind_param('sssi', $userid, $title, $desc, $price);
             $stmt->execute();
             $stmt->close();
+
+
+            
+            header("Location: ../offer.php?error=1");
         }
     }
 ?>

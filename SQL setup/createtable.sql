@@ -17,5 +17,6 @@ CREATE TABLE usession(
 CREATE TABLE bodyparts(
     userID varchar(155),
     title varchar(50),
-    description varchar(350)
+    description varchar(350),
+    price int
 );
