@@ -44,14 +44,23 @@
                 <input type="submit" class="btn btn-primary btn-block btn-ghost" name="send" />
             </div>
         </form>
-        <?php 
+        <?php
+        
+            if(isset($_GET['success'])) {
+                if(isset($_SESSION["success200"])) {
+                    $msg = $_SESSION["success200"];
+                    echo '<br><div style="color:Purple;">' . $msg . '</div>';
+                }
+            }
+            unset($_SESSION['success200']);
+
             if(isset($_GET['error'])) {
                 if(isset($_SESSION["error101"])) {
                     $errorMessage = $_SESSION["error101"];
                     echo '<br><div style="color:Purple;">' . $errorMessage . '</div>';
                 }
             }
-            unset($_SESSION['error_message']);
+            unset($_SESSION['error101']);
         ?>
 </body>
 </html>

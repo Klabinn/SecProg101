@@ -27,7 +27,6 @@
         }
 
         else{
-
             $query = "SELECT * FROM users WHERE username=?;";
             $stmt = $conn->prepare($query);
             $stmt->bind_param("s", $_SESSION['username']);
@@ -42,11 +41,15 @@
             $stmt = $conn->prepare($query);
             $stmt->bind_param('sssi', $userid, $title, $desc, $price);
             $stmt->execute();
+            $result = $stmt->get_result();
+
             $stmt->close();
 
+            if(isset($result)){
 
-            
-            header("Location: ../offer.php?error=1");
+                $_SESSION['success200'] = "I hope you sell your organ soon!";
+                header("Location: ../offer.php?success=1");
+            }
         }
     }
 ?>
