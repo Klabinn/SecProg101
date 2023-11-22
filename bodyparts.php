@@ -21,6 +21,7 @@
         <a class="active" href="home.php">SignOut</a>
         <a href="bodyparts.php">BodyParts</a>
         <a href="offer.php">Auction Register</a>
+        <a href="offerAudit.php">Auction Audit</a>
     </div> 
 </body>
 </html>
