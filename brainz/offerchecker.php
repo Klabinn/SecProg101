@@ -39,6 +39,21 @@
             $unique = uniqid();
             $attachment = $_FILES['file'];
             $attachment_name = $attachment['name'];
+            $extensions = ['png', 'jpg', 'jpeg'];
+
+            if (!in_array(strtolower(pathinfo($attachment_name, PATHINFO_EXTENSION)), $extensions)) {
+                $_SESSION['error101'] = "Invalid format! Please use: PNG, JPG, JPEG.";
+                header("Location: ../offer.php?error=1");
+                exit;
+            }
+
+            $maxSize = 25 * 1024 * 1024;
+            if ($attachment['size'] > $maxSize) {
+                $_SESSION['error101'] = "File size too big! Please use a smaller file. (Max: 25 MB)";
+                header("Location: ../offer.php?error=1");
+                exit;
+            }
+
             $attachment_tmp_name = $attachment['tmp_name'];
             $uniq_attach_name = $unique . "_" . $attachment_name;
             $upload_path = "../uploads/" . $uniq_attach_name;
