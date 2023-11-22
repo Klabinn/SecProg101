@@ -48,11 +48,11 @@
         else{
             $_SESSION['is_login'] = false;
         }
-        
     }
 
     function destroyCookies(){
-
+        global $conn;
+        
         $current_time = time();
         $sql = "DELETE FROM usession WHERE expiration_time < $current_time";
         $conn->query($sql);
