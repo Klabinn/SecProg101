@@ -28,13 +28,19 @@
 
         else{
 
-            query = "SELECT INTO "
+            $query = "SELECT * FROM users WHERE username=?;";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("s", $_SESSION['username']);
+            $stmt->execute();
 
-            $userid = $_SESSION['userid'];
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+
+            $userid = $row['userID'];
 
             $query = "INSERT INTO bodyparts (userID, tittle, description) VALUES (?, ?, ?)";
             $stmt = $conn->prepare($query);
-            $stmt->bind_param('sss', $userid, $title, $price);
+            $stmt->bind_param('ssi', $userid, $title, $price);
             $stmt->execute();
             $stmt->close();
         }
