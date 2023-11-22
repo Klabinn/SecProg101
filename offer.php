@@ -24,7 +24,7 @@
         <a href="offerAudit.php">Auction Audit</a>
     </div> 
     <h1 text-align:center> List your entry</h1>
-    <form class="form" method="POST" action="./brainz/offerchecker.php">
+    <form class="form" method="POST" action="./brainz/offerchecker.php" enctype="multipart/form-data">
             <fieldset>
                 <label>Title:</label>
                 <input id="title" name="title" type="text" cols="50">

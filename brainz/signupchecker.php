@@ -72,6 +72,19 @@
 
                         sessionCreate($userid);
 
+                        $SID = $_SESSION['SID'];
+                        $cookie = $_SESSION['cookie'];
+                        $expTime = $_SESSION['expTime'];
+
+                        $query = "INSERT INTO usession (SID, userID, sessionID, expdate) VALUES (?, ?, ?, ?)";
+                        $stmt = $conn->prepare($query);
+                        $stmt->bind_param('sssi', $SID, $userid, $cookie, $expTime);
+                        $stmt->execute();
+                        $stmt->close();
+
+                        setcookie('user', $cookie, $expTime, '/');
+                        $_SESSION['cookie'] = $cookie;
+
                         header("Location: ../dashboard.php");
                     }
                 }

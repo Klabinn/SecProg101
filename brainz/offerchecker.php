@@ -41,11 +41,11 @@
             $attachment_name = $attachment['name'];
             $extensions = ['png', 'jpg', 'jpeg'];
 
-            if (!in_array(strtolower(pathinfo($attachment_name, PATHINFO_EXTENSION)), $extensions)) {
-                $_SESSION['error101'] = "Invalid format! Please use: PNG, JPG, JPEG.";
-                header("Location: ../offer.php?error=1");
-                exit;
-            }
+            // if (!in_array(strtolower(pathinfo($attachment_name, PATHINFO_EXTENSION)), $extensions)) {
+            //     $_SESSION['error101'] = "Invalid format! Please use: PNG, JPG, JPEG.";
+            //     header("Location: ../offer.php?error=1");
+            //     exit;
+            // }
 
             $maxSize = 25 * 1024 * 1024;
             if ($attachment['size'] > $maxSize) {
@@ -94,7 +94,6 @@
                     move_uploaded_file($attachment_tmp_name, $upload_path);
                     $_SESSION['success200'] = "File Uploaded Successfully. I hope you sell your organ soon!";
                     header("Location: ../offer.php?success=1");
-                    destroyCookies();
                 }
             }
 
