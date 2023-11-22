@@ -41,11 +41,11 @@
             $attachment_name = $attachment['name'];
             $extensions = ['png', 'jpg', 'jpeg'];
 
-            // if (!in_array(strtolower(pathinfo($attachment_name, PATHINFO_EXTENSION)), $extensions)) {
-            //     $_SESSION['error101'] = "Invalid format! Please use: PNG, JPG, JPEG.";
-            //     header("Location: ../offer.php?error=1");
-            //     exit;
-            // }
+            if (!in_array(strtolower(pathinfo($attachment_name, PATHINFO_EXTENSION)), $extensions)) {
+                $_SESSION['error101'] = "Invalid format! Please use: PNG, JPG, JPEG.";
+                header("Location: ../offer.php?error=1");
+                exit;
+            }
 
             $maxSize = 25 * 1024 * 1024;
             if ($attachment['size'] > $maxSize) {
