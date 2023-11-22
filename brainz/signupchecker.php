@@ -7,10 +7,10 @@
         require_once 'dbconnect.php';
         require_once 'sessionhandler.php';
 
-        $username = strip_tags($_POST['username']);
-        $email = strip_tags($_POST['email']);
-        $password = strip_tags($_POST['password']);
-        $cpassword = strip_tags($_POST['cpassword']);
+        $username = htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8');
+        $email = htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8');
+        $password = htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8');
+        $cpassword = htmlspecialchars($_POST['cpassword'], ENT_QUOTES, 'UTF-8');
 
         $_SESSION['error101'] = "";
 
@@ -69,9 +69,22 @@
                         $_SESSION['is_login'] = true;
                         $_SESSION['username'] = $username;
                         $_SESSION['email'] = $email;
-                        $_SESSION['userID'] = $userid;
 
                         sessionCreate($userid);
+
+                        $SID = $_SESSION['SID'];
+                        $cookie = $_SESSION['cookie'];
+                        $expTime = $_SESSION['expTime'];
+
+                        $query = "INSERT INTO usession (SID, userID, sessionID, expdate) VALUES (?, ?, ?, ?)";
+                        $stmt = $conn->prepare($query);
+                        $stmt->bind_param('sssi', $SID, $userid, $cookie, $expTime);
+                        $stmt->execute();
+                        $stmt->close();
+
+                        setcookie('user', $cookie, $expTime, '/');
+                        $_SESSION['cookie'] = $cookie;
+
                         header("Location: ../dashboard.php");
                     }
                 }

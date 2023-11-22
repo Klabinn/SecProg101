@@ -90,3 +90,30 @@ input[type="submit"]:hover {
 .warning {
     color: red;
 }
+
+.title {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px; /* Adjust the value as needed */
+}
+
+.card-content {
+    text-align: center;
+    margin-top: 10px; /* Adjust the value as needed */
+}
+
+.innern {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.inner {
+    text-align: center;
+    margin-top: 5px;
+    display: block;
+    margin: 0 auto;
+    width: 300px; 
+    height: 200px; 
+    object-fit: cover;
+}
