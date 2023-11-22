@@ -28,7 +28,6 @@
 
     <div>
         <?php
-            // $user_id = $_SESSION['user_id'];
             $quer = "SELECT u.username, b.title, b.description, b.price, b.attachment
                     FROM bodyparts b
                     JOIN users u ON b.userID = u.userID
