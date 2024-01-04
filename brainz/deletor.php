@@ -19,7 +19,8 @@
         $userid = $row['userID'];
         $stmt->close();
 
-        $ttd = strip_tags($_POST['ttd']);
+        $ttd = trim($_POST['ttd']);
+        $ttd = htmlspecialchars($ttd, ENT_QUOTES, 'UTF-8');
 
         $sql = "SELECT * FROM bodyparts WHERE title = ? && userID = ?;";
         $stmt = $conn->prepare($sql);

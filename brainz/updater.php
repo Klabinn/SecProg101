@@ -18,9 +18,12 @@
         $row = $result->fetch_assoc();
         $userid = $row['userID'];
         $stmt->close();
+        
+        $originaltitle = trim($_POST['OriginalTitle']);
+        $pricechange = trim($_POST['pricechange']);
 
-        $originaltitle = strip_tags($_POST['OriginalTitle']);
-        $pricechange = strip_tags($_POST['pricechange']);
+        $originaltitle = htmlspecialchars($originaltitle, ENT_QUOTES, 'UTF-8');
+        $pricechange = htmlspecialchars($pricechange, ENT_QUOTES, 'UTF-8');
 
         $sql = "SELECT * FROM bodyparts WHERE title = ? && userID = ?;";
         $stmt = $conn->prepare($sql);

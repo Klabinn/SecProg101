@@ -5,8 +5,11 @@
         
         require_once 'dbconnect.php';
 
-        $username = htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8'); 
-        $password = htmlspecialchars($_POST['password'], ENT_QUOTES, 'UTF-8');
+        $username = trim($_POST['username']);
+        $password = trim($_POST['password']);
+
+        $username = htmlspecialchars($username, ENT_QUOTES, 'UTF-8'); 
+        $password = htmlspecialchars($password, ENT_QUOTES, 'UTF-8');
 
         $ver = "SELECT * FROM users WHERE username=?;";
         $stmt = $conn->prepare($ver);

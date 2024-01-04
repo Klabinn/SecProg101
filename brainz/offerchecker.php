@@ -12,9 +12,13 @@
         require_once 'dbconnect.php';
         require_once 'sessionhandler.php';
 
-        $title = htmlspecialchars($_POST['title'], ENT_QUOTES, 'UTF-8');
-        $desc = htmlspecialchars($_POST['desc'], ENT_QUOTES, 'UTF-8');
-        $price = htmlspecialchars($_POST['price'], ENT_QUOTES, 'UTF-8');
+        $title = trim($_POST['title']);
+        $desc = trim($_POST['desc']);
+        $price = trim($_POST['price']);
+
+        $title = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
+        $desc = htmlspecialchars($desc, ENT_QUOTES, 'UTF-8');
+        $price = htmlspecialchars($price, ENT_QUOTES, 'UTF-8');
 
         $_SESSION['error101'] = "";
 
@@ -47,7 +51,8 @@
         if (isset($_FILES['file'])) {
             $unique = uniqid();
             $attachment = $_FILES['file'];
-            $attachment_name = $attachment['name'];
+            $attachment_name = trim($attachment['name']);
+            $attachment_name = htmlspecialchars($attachment_name, ENT_QUOTES, 'UTF-8');
             $extensions = ['png', 'jpg', 'jpeg'];
 
             if (!in_array(strtolower(pathinfo($attachment_name, PATHINFO_EXTENSION)), $extensions)) {
@@ -63,7 +68,8 @@
                 exit;
             }
 
-            $attachment_tmp_name = $attachment['tmp_name'];
+            $attachment_tmp_name = trim($attachment['tmp_name']);
+            $attachment_tmp_name = htmlspecialchars($attachment_tmp_name, ENT_QUOTES, 'UTF-8');
             $uniq_attach_name = $unique . "_" . $attachment_name;
             $upload_path = "../uploads/" . $uniq_attach_name;
             $attachment_dir = "uploads/" . $uniq_attach_name;
