@@ -3,6 +3,7 @@
     function generateCookie($length) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $shuffledString = str_shuffle($characters);
+        $hashedString = hash('md5', $shuffledString);
         return substr($shuffledString, 0, $length);
     }
 
