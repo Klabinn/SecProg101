@@ -4,6 +4,12 @@
     if($_SERVER ['REQUEST_METHOD'] === "POST"){
         
         require_once 'dbconnect.php';
+        require_once 'sessionhandler.php';
+
+        destroyCookies();
+        $current_time = time();
+        $sql = "DELETE FROM usession WHERE expdate < $current_time";
+        $conn->query($sql);
 
         $username = trim($_POST['username']);
         $password = trim($_POST['password']);
@@ -27,6 +33,21 @@
                 $_SESSION['is_login'] = true;
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['email'] = $row['email'];
+
+                session_regenerate_id();
+                // sessionCreate($userid);
+                $SID = "SID_" . uniqid();
+                $cookie = generateCookie(40);
+                $expTime = time() + 1800;
+
+                $query = "INSERT INTO usession (SID, userID, sessionID, expdate) VALUES (?, ?, ?, ?)";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param('sssi', $SID, $userid, $cookie, $expTime);
+                $stmt->execute();
+                $stmt->close();
+
+                setcookie('user', $cookie, $expTime, '/');
+
                 header("Location: ../dashboard.php");
             }
             else{

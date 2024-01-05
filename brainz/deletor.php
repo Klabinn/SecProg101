@@ -9,6 +9,9 @@
     if($_SERVER ['REQUEST_METHOD'] === "POST"){
         
         require_once 'dbconnect.php';
+        require_once 'sessionhandler.php';
+
+        destroyCookies();
 
         $sql = "SELECT * FROM users WHERE username=?;";
         $stmt = $conn->prepare($sql);

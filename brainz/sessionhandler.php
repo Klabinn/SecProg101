@@ -7,29 +7,6 @@
         return substr($shuffledString, 0, $length);
     }
 
-    function sessionCreate($userID) {
-        global $conn;
-        $SID = "SID_" . uniqid();
-        $cookie = generateCookie(40);
-        $expTime = time() + 1800; // 30 minutes
-
-        $_SESSION['SID'] = $SID;
-        $_SESSION['cookie'] = $cookie;
-        $_SESSION['expTime'] = $expTime;
-        $userid = $_SESSION['userID'];
-
-        $query = "INSERT INTO usession (SID, userID, sessionID, expdate) VALUES (?, ?, ?, ?)";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param('sssi', $SID, $userid, $cookie, $expTime);
-        $stmt->execute();
-        $stmt->close();
-
-        setcookie($_SESSION['username'], $cookie, $expTime, '/');
-        $_SESSION['cookie'] = $cookie;
-
-        unset($_SESSION['userID']);
-    }
-
     function sessionChecker(){
         global $conn;
 
@@ -57,6 +34,5 @@
         $current_time = time();
         $sql = "DELETE FROM usession WHERE expdate < $current_time";
         $conn->query($sql);
-        $conn->close();
     }
 ?>

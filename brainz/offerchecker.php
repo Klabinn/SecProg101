@@ -12,6 +12,8 @@
         require_once 'dbconnect.php';
         require_once 'sessionhandler.php';
 
+        destroyCookies();
+
         $title = trim($_POST['title']);
         $desc = trim($_POST['desc']);
         $price = trim($_POST['price']);

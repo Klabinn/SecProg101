@@ -7,6 +7,8 @@
         require_once 'dbconnect.php';
         require_once 'sessionhandler.php';
 
+        destroyCookies();
+
         $username = trim($_POST['username']);
         $email = trim($_POST['email']);
         $password = trim($_POST['password']);
@@ -75,11 +77,9 @@
                         $_SESSION['username'] = $username;
                         $_SESSION['email'] = $email;
 
-                        sessionCreate($userid);
-
-                        $SID = $_SESSION['SID'];
-                        $cookie = $_SESSION['cookie'];
-                        $expTime = $_SESSION['expTime'];
+                        $SID = "SID_" . uniqid();
+                        $cookie = generateCookie(40);
+                        $expTime = time() + 1800;
 
                         $query = "INSERT INTO usession (SID, userID, sessionID, expdate) VALUES (?, ?, ?, ?)";
                         $stmt = $conn->prepare($query);
@@ -88,8 +88,6 @@
                         $stmt->close();
 
                         setcookie('user', $cookie, $expTime, '/');
-                        $_SESSION['cookie'] = $cookie;
-
                         header("Location: ../dashboard.php");
                     }
                 }
